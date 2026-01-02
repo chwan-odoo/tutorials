@@ -17,6 +17,7 @@
                     <group>
                         <group string="General Information">
                             <field name="state"/>
+                            <field name="property_type_id"/>
                             <field name="postcode"/>
                             <field name="date_availability"/>
                             <field name="active" invisible="1"/>
@@ -50,14 +51,14 @@
         <field name="model">estate.property</field>
         <field name="arch" type="xml">
             <search>
+                <field name="name"/>
+                <field name="property_type_id"/>
+                <field name="postcode"/>
                 <filter string="Archived" name="inactive" domain="[('active', '=', False)]"/>
                 <filter string="New" name="state_new" domain="[('state', '=', 'new')]"/>
                 <filter string="Offer Received" name="state_offer_received" domain="[('state', '=', 'offer_received')]"/>
                 <filter string="Offer Accepted" name="state_offer_accepted" domain="[('state', '=', 'offer_accepted')]"/>
                 <filter string="Sold" name="state_sold" domain="[('state', '=', 'sold')]"/>
-                <!-- <group expand="0" string="Group By">
-                    <filter string="Postcode" name="group_postcode" context="{'group_by':'postcode'}"/>
-                </group> -->
             </search>
         </field>
     </record>
@@ -68,6 +69,7 @@
         <field name="arch" type="xml">
             <list>
                 <field name="name"/>
+                <field name="property_type_id"/>
                 <field name="postcode"/>
                 <field name="expected_price"/>
             </list>
@@ -83,6 +85,9 @@
     <menuitem id="estate_menu_root" name="Estate">
         <menuitem id="estate_first_level_menu" name="Advertisements">
             <menuitem id="estate_property_menu_action" action="estate_property_action"/>
+        </menuitem>
+        <menuitem id="estate_settings_menu" name="Settings">
+            <menuitem id="estate_property_type_menu_action" action="estate_property_type_action"/>
         </menuitem>
     </menuitem>
 
