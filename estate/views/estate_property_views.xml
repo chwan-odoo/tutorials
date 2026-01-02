@@ -34,12 +34,13 @@
                             <field name="living_area"/>
                             <field name="facades"/>
                             <field name="garage"/>
-                        </group>
-                        <group string="Garden">
                             <field name="garden"/>
                             <field name="garden_area" invisible="not garden"/>
                             <field name="garden_orientation" invisible="not garden"/>
+                            <field name="total_area"/>
+                            <field name="best_offer"/>
                         </group>
+                        <group></group>
                     </group>
 
                     <notebook>
