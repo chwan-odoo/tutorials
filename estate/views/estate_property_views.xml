@@ -14,6 +14,7 @@
                             <field name="name" placeholder="Property Name"/>
                         </h1>
                     </div>
+                    <field name="tag_ids" widget="many2many_tags"/>
                     <group>
                         <group string="General Information">
                             <field name="state"/>
@@ -21,7 +22,6 @@
                             <field name="postcode"/>
                             <field name="date_availability"/>
                             <field name="active" invisible="1"/>
-                            <field name="description" />
                         </group>
                         <group string="Financial">
                             <field name="expected_price"/>
@@ -41,6 +41,23 @@
                             <field name="garden_orientation" invisible="not garden"/>
                         </group>
                     </group>
+
+                    <notebook>
+                        <page string="Description">
+                            <group>
+                               <field name="description" />
+                            </group>
+                        </page>
+                        <page string="Offers">
+                            <field name="offer_ids"/>
+                        </page>
+                        <page string="Other Information">
+                            <group>
+                                <field name="salesperson_id"/>
+                                <field name="buyer_id"/>
+                            </group>
+                        </page>
+                    </notebook>
                 </sheet>
             </form>
         </field>
@@ -70,7 +87,7 @@
             <list>
                 <field name="name"/>
                 <field name="property_type_id"/>
-                <field name="postcode"/>
+                <field name="date_availability"/>
                 <field name="expected_price"/>
             </list>
         </field>
@@ -88,6 +105,7 @@
         </menuitem>
         <menuitem id="estate_settings_menu" name="Settings">
             <menuitem id="estate_property_type_menu_action" action="estate_property_type_action"/>
+            <menuitem id="estate_property_tag_menu_action" action="estate_property_tag_action"/>
         </menuitem>
     </menuitem>
 
