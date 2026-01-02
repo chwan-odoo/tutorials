@@ -38,5 +38,6 @@ class Estate(models.Model):
             ('offer_accepted', 'Offer Accepted'),
             ('sold', 'Sold'),
             ('cancelled', 'Cancelled'),
-        ]
+        ],
+        default='new'
     )

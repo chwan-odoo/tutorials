@@ -1,6 +1,5 @@
 <?xml version="1.0"?>
 <odoo>
-    <!-- Simple Form View -->
     <record id="estate_property_view_form" model="ir.ui.view">
         <field name="name">estate.property.form</field>
         <field name="model">estate.property</field>
@@ -10,32 +9,59 @@
                 </header>
                 <sheet>
                     <widget name="web_ribbon" title="Archived" bg_color="text-bg-danger" invisible="active"/>
-                    <h1>
-                        <field name="name"/>
-                    </h1>
+                    <div class="oe_title">
+                        <h1>
+                            <field name="name" placeholder="Property Name"/>
+                        </h1>
+                    </div>
                     <group>
-                        <field name="active" invisible="1"/>
+                        <group string="General Information">
+                            <field name="state"/>
+                            <field name="postcode"/>
+                            <field name="date_availability"/>
+                            <field name="active" invisible="1"/>
+                            <field name="description" />
+                        </group>
+                        <group string="Financial">
+                            <field name="expected_price"/>
+                            <field name="selling_price"/>
+                        </group>
                     </group>
                     <group>
-                        <field name="description"/>
-                        <field name="postcode"/>
-                        <field name="expected_price"/>
-                        <field name="bedrooms"/>
-                        <field name="facades"/>
-                        <field name="garden"/>
-                        <field name="garden_orientation"/>
-                        <field name="date_availability"/>
-                        <field name="selling_price"/>
-                        <field name="living_area"/>
-                        <field name="garage"/>
-                        <field name="garden_area"/>
+                        <group string="Property Details">
+                            <field name="bedrooms"/>
+                            <field name="living_area"/>
+                            <field name="facades"/>
+                            <field name="garage"/>
+                        </group>
+                        <group string="Garden">
+                            <field name="garden"/>
+                            <field name="garden_area" invisible="not garden"/>
+                            <field name="garden_orientation" invisible="not garden"/>
+                        </group>
                     </group>
                 </sheet>
             </form>
         </field>
     </record>
 
-    <!-- Simple Tree View -->
+    <record id="estate_property_view_search" model="ir.ui.view">
+        <field name="name">estate.property.search</field>
+        <field name="model">estate.property</field>
+        <field name="arch" type="xml">
+            <search>
+                <filter string="Archived" name="inactive" domain="[('active', '=', False)]"/>
+                <filter string="New" name="state_new" domain="[('state', '=', 'new')]"/>
+                <filter string="Offer Received" name="state_offer_received" domain="[('state', '=', 'offer_received')]"/>
+                <filter string="Offer Accepted" name="state_offer_accepted" domain="[('state', '=', 'offer_accepted')]"/>
+                <filter string="Sold" name="state_sold" domain="[('state', '=', 'sold')]"/>
+                <!-- <group expand="0" string="Group By">
+                    <filter string="Postcode" name="group_postcode" context="{'group_by':'postcode'}"/>
+                </group> -->
+            </search>
+        </field>
+    </record>
+
     <record id="estate_property_view_tree" model="ir.ui.view">
         <field name="name">estate.property.list</field>
         <field name="model">estate.property</field>
@@ -48,14 +74,12 @@
         </field>
     </record>
 
-    <!-- Action -->
     <record id="estate_property_action" model="ir.actions.act_window">
         <field name="name">Properties</field>
         <field name="res_model">estate.property</field>
         <field name="view_mode">list,form</field>
     </record>
 
-    <!-- Menu -->
     <menuitem id="estate_menu_root" name="Estate">
         <menuitem id="estate_first_level_menu" name="Advertisements">
             <menuitem id="estate_property_menu_action" action="estate_property_action"/>
