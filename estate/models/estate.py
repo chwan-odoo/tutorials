@@ -1,5 +1,6 @@
 from dateutil.relativedelta import relativedelta
 from odoo import api, fields, models
+from odoo.exceptions import UserError
 
 
 def _default_date_availability(self):
@@ -70,3 +71,19 @@ class Estate(models.Model):
         else:
             self.garden_area = 0
             self.garden_orientation = False
+
+    def action_cancel(self):
+        for record in self:
+            if record.state == 'sold':
+                raise UserError("Sold property cannot be cancelled.")
+            record.state = 'cancelled'
+        return True
+
+    def action_sold(self):
+        for record in self:
+            if record.state == 'cancelled':
+                raise UserError("Cancelled property cannot be sold.")
+            record.state = 'sold'
+        return True
+
+    
