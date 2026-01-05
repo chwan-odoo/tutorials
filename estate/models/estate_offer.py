@@ -22,11 +22,13 @@ class EstatePropertyOffer(models.Model):
     )
     partner_id = fields.Many2one("res.partner", string="Partner", required=True)
     property_id = fields.Many2one("estate.property", string="Property", required=True)
+    property_type_id = fields.Many2one("estate.property.type", related="property_id.property_type_id")
 
     _check_offer_price = models.Constraint(
         "CHECK(price > 0)",
         "The offer price must be strictly positive.",
     )
+    
 
     @api.depends("create_date", "validity")
     def _compute_date_deadline(self):
@@ -46,6 +48,14 @@ class EstatePropertyOffer(models.Model):
                 else:
                     record.validity = (record.date_deadline - fields.Date.today()).days
 
+    @api.model_create_multi
+    def create(self, vals_list):
+        offers = super().create(vals_list)
+        for offer in offers:
+            if offer.property_id and offer.property_id.state == "new":
+                offer.property_id.state = "offer_received"
+        return offers
+
     def action_accept(self):
         for record in self:
             if record.property_id.offer_ids.filtered(
@@ -55,6 +65,7 @@ class EstatePropertyOffer(models.Model):
                     "Another offer has already been accepted for this property."
                 )
             record.status = "accepted"
+            record.property_id.state = "offer_accepted"
             record.property_id.selling_price = record.price
             record.property_id.buyer_id = record.partner_id
         return True
