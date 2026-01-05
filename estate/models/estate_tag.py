@@ -7,8 +7,9 @@ class Estate(models.Model):
     _order = "name desc"
 
     name = fields.Char(required=True)
+    color = fields.Integer()
 
     _name_uniq = models.Constraint(
-        'unique(name)',
-        'Tag name already exists!',
+        "unique(name)",
+        "Tag name already exists!",
     )

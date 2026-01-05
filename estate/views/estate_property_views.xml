@@ -17,11 +17,11 @@
                             <field name="name" placeholder="Property Name"/>
                         </h1>
                     </div>
-                    <field name="tag_ids" widget="many2many_tags"/>
+                    <field name="tag_ids" widget="many2many_tags" options="{'color_field': 'color'}"/>
                     <group>
                         <group string="General Information">
                             <field name="state"/>
-                            <field name="property_type_id"/>
+                            <field name="property_type_id" options="{'no_create': True, 'no_open': True}"/>
                             <field name="postcode"/>
                             <field name="date_availability"/>
                             <field name="active" invisible="1"/>
