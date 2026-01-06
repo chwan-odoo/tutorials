@@ -28,8 +28,29 @@ class EstatePropertyOffer(models.Model):
         "CHECK(price > 0)",
         "The offer price must be strictly positive.",
     )
-    
 
+    @api.model_create_multi
+    def create(self, vals_list):
+        for vals in vals_list:
+            property_id = vals.get("property_id")
+            if property_id:
+                curr_property = self.env["estate.property"].browse(property_id)
+
+                # Check if new offer price is lower than existing offers
+                if curr_property.offer_ids:
+                    max_existing_price = max(curr_property.offer_ids.mapped("price"))
+                    new_price = vals.get("price", 0)
+                    if new_price <= max_existing_price:
+                        raise UserError(
+                            f"The offer amount must be higher than {max_existing_price:.2f}"
+                        )
+
+                # Set property state to 'offer_received' if it's new
+                if curr_property.state == "new":
+                    curr_property.state = "offer_received"
+
+        return super(EstatePropertyOffer, self).create(vals_list)
+    
     @api.depends("create_date", "validity")
     def _compute_date_deadline(self):
         for record in self:
@@ -48,13 +69,6 @@ class EstatePropertyOffer(models.Model):
                 else:
                     record.validity = (record.date_deadline - fields.Date.today()).days
 
-    @api.model_create_multi
-    def create(self, vals_list):
-        offers = super().create(vals_list)
-        for offer in offers:
-            if offer.property_id and offer.property_id.state == "new":
-                offer.property_id.state = "offer_received"
-        return offers
 
     def action_accept(self):
         for record in self:
