@@ -7,7 +7,9 @@
     "category": "Sales",
     "website": "",
     "depends": ["base"],
-    "data": [],
+    "data": [
+        "security/ir.model.access.csv",
+    ],
     "demo": [],
     "application": True,
     "installable": True,
