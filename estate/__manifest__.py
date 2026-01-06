@@ -1,28 +1,26 @@
 {
-    'name': 'Estate',
-    'version': '1.0',
-    'category': 'Sales/CRM',
-    'sequence': 1,
-    'summary': 'Estate App for managing properties',
-    'website': '',
-    'depends': [
-        'base_setup'
+    "name": "Estate",
+    "version": "1.0",
+    "category": "Sales/CRM",
+    "sequence": 1,
+    "summary": "Estate App for managing properties",
+    "website": "",
+    "depends": ["base_setup"],
+    "data": [
+        "security/ir.model.access.csv",
+        "views/estate_property_offer_views.xml",
+        "views/estate_property_type_views.xml",
+        "views/estate_property_tag_views.xml",
+        "views/estate_property_views.xml",
+        "views/res_users_views.xml",
+        "views/estate_property_kanban_view.xml",
     ],
-    'data': [
-        'security/ir.model.access.csv',
-        'views/estate_property_offer_views.xml',
-        'views/estate_property_type_views.xml',
-        'views/estate_property_tag_views.xml',
-        'views/estate_property_views.xml',
-        'views/res_users_views.xml',
+    "demo": [
+        "demo/demo_data.xml",
     ],
-    'demo': [
-        'demo/demo_data.xml',
-    ],
-    'installable': True,
-    'application': True,
-    'assets': {
-    },
-    'author': 'Cheng-Yan Wang(CHWAN)',
-    'license': 'LGPL-3',
+    "installable": True,
+    "application": True,
+    "assets": {},
+    "author": "Cheng-Yan Wang(CHWAN)",
+    "license": "LGPL-3",
 }
