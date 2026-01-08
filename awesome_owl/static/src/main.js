@@ -1,12 +1,12 @@
 import { whenReady } from "@odoo/owl";
 import { mountComponent } from "@web/env";
-import { Playground } from "./playground";
+import { App } from "./app";
 
 const config = {
     dev: true,
-    name: "Owl Tutorial" 
+    name: "Owl Tutorial"
 };
 
-// Mount the Playground component when the document.body is ready
-whenReady(() => mountComponent(Playground, document.body, config));
+// Mount the App component when the document.body is ready
+whenReady(() => mountComponent(App, document.body, config));
 
