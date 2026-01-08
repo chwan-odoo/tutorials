@@ -1,6 +1,31 @@
 <?xml version="1.0" encoding="utf-8"?>
 <odoo>
     <data>
+        <!-- Demo Partners for Estate Offers -->
+        <record id="estate_partner_1" model="res.partner">
+            <field name="name">Azure Interior</field>
+            <field name="email">azure.interior@example.com</field>
+            <field name="phone">+1-555-0101</field>
+        </record>
+
+        <record id="estate_partner_2" model="res.partner">
+            <field name="name">Deco Addict</field>
+            <field name="email">deco.addict@example.com</field>
+            <field name="phone">+1-555-0102</field>
+        </record>
+
+        <record id="estate_partner_3" model="res.partner">
+            <field name="name">Gemini Furniture</field>
+            <field name="email">gemini.furniture@example.com</field>
+            <field name="phone">+1-555-0103</field>
+        </record>
+
+        <record id="estate_partner_4" model="res.partner">
+            <field name="name">Ready Mat</field>
+            <field name="email">ready.mat@example.com</field>
+            <field name="phone">+1-555-0104</field>
+        </record>
+
         <!-- Demo Estate Properties -->
         <record id="estate_property_big_villa" model="estate.property">
             <field name="name">Big Villa</field>
@@ -31,6 +56,53 @@
             <field name="facades">4</field>
             <field name="garage" eval="False"/>
             <field name="garden" eval="False"/>
+        </record>
+
+        <!-- Offers for SOLD Property (Luxury Penthouse from data file) -->
+        <record id="offer_penthouse_1" model="estate.property.offer">
+            <field name="price">2400000</field>
+            <field name="validity">10</field>
+            <field name="status">refused</field>
+            <field name="partner_id" ref="estate_partner_1"/>
+            <field name="property_id" ref="estate.estate_property_luxury_penthouse"/>
+        </record>
+
+        <record id="offer_penthouse_2" model="estate.property.offer">
+            <field name="price">2600000</field>
+            <field name="validity">14</field>
+            <field name="status">refused</field>
+            <field name="partner_id" ref="estate_partner_3"/>
+            <field name="property_id" ref="estate.estate_property_luxury_penthouse"/>
+        </record>
+
+        <record id="offer_penthouse_3" model="estate.property.offer">
+            <field name="price">2700000</field>
+            <field name="validity">7</field>
+            <field name="status">accepted</field>
+            <field name="partner_id" ref="estate_partner_2"/>
+            <field name="property_id" ref="estate.estate_property_luxury_penthouse"/>
+        </record>
+
+        <!-- Offers for OFFER RECEIVED Property (Suburban House from data file) -->
+        <record id="offer_suburban_1" model="estate.property.offer">
+            <field name="price">620000</field>
+            <field name="validity">7</field>
+            <field name="partner_id" ref="estate_partner_4"/>
+            <field name="property_id" ref="estate.estate_property_suburban_house"/>
+        </record>
+
+        <record id="offer_suburban_2" model="estate.property.offer">
+            <field name="price">640000</field>
+            <field name="validity">10</field>
+            <field name="partner_id" ref="estate_partner_1"/>
+            <field name="property_id" ref="estate.estate_property_suburban_house"/>
+        </record>
+
+        <record id="offer_suburban_3" model="estate.property.offer">
+            <field name="price">660000</field>
+            <field name="validity">14</field>
+            <field name="partner_id" ref="estate_partner_3"/>
+            <field name="property_id" ref="estate.estate_property_suburban_house"/>
         </record>
     </data>
 </odoo>

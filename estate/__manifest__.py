@@ -5,7 +5,7 @@
     "sequence": 1,
     "summary": "Estate App for managing properties",
     "website": "",
-    "depends": ["base_setup"],
+    "depends": ["base_setup", "sale"],
     "data": [
         "security/ir.model.access.csv",
         "views/estate_property_offer_views.xml",
@@ -14,8 +14,11 @@
         "views/estate_property_views.xml",
         "views/res_users_views.xml",
         "views/estate_property_kanban_view.xml",
-        "data/estate.property.type.csv",
-        "data/estate_property.xml",
+        "views/report/estate_property_offer.xml",
+        'views/branch_views.xml',
+        # "data/estate.property.type.csv",
+        # "data/estate_property.xml",
+        # "demo/demo_data_extended.xml",
     ],
     "demo": [
         "demo/demo_data.xml",

@@ -1,7 +1,7 @@
 from odoo import fields, models
 
 
-class Estate(models.Model):
+class SalesBranch(models.Model):
     _name = "estate.property.tag"
     _description = "Estate Tag Model"
     _order = "name desc"

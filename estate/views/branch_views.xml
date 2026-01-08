@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="action_branch_management" model="ir.actions.act_window">
+        <field name="name">Branches</field>
+        <field name="res_model">sale.branch</field>
+        <field name="view_mode">list,form</field>
+        <field name="help" type="html">
+          <p class="o_view_nocontent_smiling_face">
+            Create your first Branch!
+          </p>
+        </field>
+    </record>
+
+    <record id="sale_order_view_form" model="ir.ui.view">
+        <field name="name">sale.order.view.form.inherit.sales.order</field>
+        <field name="model">sale.order</field>
+        <field name="inherit_id" ref="sale.view_order_form"/>
+        <field name="arch" type="xml">
+            <xpath expr="//field[@name='payment_term_id']" position="after">
+                <field name="branch_id"/>
+            </xpath>
+        </field>
+    </record>
+
+    <menuitem id="menu_sale_branch"
+              name="Branches"
+              parent="sale.menu_sale_config"
+              action="action_branch_management"
+              sequence="10"/>
+</odoo>
