@@ -5,8 +5,8 @@ export class Card extends Component {
     static template = "awesome_owl.card";
     static components = { Counter };
     static props = {
-        title: String,
-        text: String,
+        title: {type: String},
+        text: {type: String},
     };
 
     setup() {}
