@@ -1,4 +1,4 @@
-import { Component, useState } from '@odoo/owl';
+import { Component, useState, useRef, onMounted } from '@odoo/owl';
 import { TodoItem } from '../todo_item/todo_item';
 
 export class TodoList extends Component {
@@ -7,17 +7,25 @@ export class TodoList extends Component {
     static props = {};
 
     setup(){
-        this.todoList = [
-            {
-                id: 1,
-                description: 'Complete the tutorial',
-                isCompleted: true,
-            },
-            {
-                id: 2,
-                description: 'Learn OWL',
+        this.myRef = useRef('the_input_bar');
+        this.todoList = useState([]);
+        this.counter = 1;
+
+        onMounted(() => {
+            this.myRef.el.focus();
+        });
+    }
+
+    addTodo(ev) {
+        if (ev.keyCode === 13 && ev.target.value.trim() !== "") {
+            const text = ev.target.value;
+            this.todoList.push({
+                id: this.counter,
+                description: text,
                 isCompleted: false,
-            }
-        ];
+            });
+            this.counter++;
+            ev.target.value = "";
+        }
     }
 }

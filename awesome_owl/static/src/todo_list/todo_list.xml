@@ -3,8 +3,10 @@
 
     <t t-name="awesome_owl.TodoList">
         <div class="p-3">
-            <t t-foreach="[0 , 1]" t-as="i" t-key="i">
-                <TodoItem todo="todoList[i]"/>
+            <label for="new-todo"><b>Add a new todo: </b></label>
+            <input t-ref="the_input_bar" t-on-keyup="addTodo"></input>
+            <t t-foreach="todoList" t-as="todo" t-key="todo.id">
+                <TodoItem todo="todo"/>
             </t>
         </div>
     </t>
