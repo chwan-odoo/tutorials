@@ -11,8 +11,15 @@ export class TodoItem extends Component {
                 isCompleted: Boolean,
             },
             optional: true
-        }
+        },
     };
 
-    setup() {}
+    setup() {
+        this.onToggle = this.onToggle.bind(this);
+    }
+
+    onToggle() {
+        this.props.todo.isCompleted = !this.props.todo.isCompleted;
+    }
+
 }

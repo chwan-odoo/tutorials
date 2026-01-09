@@ -5,8 +5,8 @@
         <div class="p-3">
 <!--            <Card title="cardOneTitleEscaped" text="'content of card 1'"/>-->
 <!--            <Card title="cardTwoTitleEscaped" text="'content of card 2'"/>-->
-<!--            <Counter onChange="incrementSum"/>-->
-<!--            This is displaying a value <t t-esc="sum.value"/>-->
+            <Counter onChange="incrementSum"/>
+            This is displaying a value <t t-esc="sum.value"/>
             <TodoList/>
         </div>
     </t>
