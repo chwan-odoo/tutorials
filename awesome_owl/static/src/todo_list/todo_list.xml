@@ -3,7 +3,7 @@
 
     <t t-name="awesome_owl.TodoList">
         <div class="p-3">
-            <t t-foreach="[1 , 2]" t-as="i" t-key="i">
+            <t t-foreach="[0 , 1]" t-as="i" t-key="i">
                 <TodoItem todo="todoList[i]"/>
             </t>
         </div>
