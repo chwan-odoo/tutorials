@@ -6,10 +6,12 @@ import { useService } from "@web/core/utils/hooks";
 import { _t } from "@web/core/l10n/translation";
 import { DashboardItem } from "./dashboard_item";
 import { rpc } from "@web/core/network/rpc";
+import { PieChart } from "./pie_chart";
+
 
 export class AwesomeDashboard extends Component {
     static template = "awesome_dashboard.AwesomeDashboard";
-    static components = { DashboardItem };
+    static components = { DashboardItem, PieChart };
 
     setup() {
         this.statsService = useService("awesome_dashboard.statistics");

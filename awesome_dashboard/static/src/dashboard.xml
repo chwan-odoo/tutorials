@@ -43,6 +43,9 @@
                         <span class="flex-column o_stat_highlight"><t t-esc="state.stats.average_time"/></span>
                     </div>
                 </DashboardItem>
+                 <DashboardItem size="2">
+                     <PieChart />
+                 </DashboardItem>
             </div>
         </div>
     </t>
