@@ -7,7 +7,14 @@ export class Card extends Component {
     static props = {
         title: {type: String},
         text: {type: String},
+        slots: { type: Object, optional: true }
     };
 
-    setup() {}
+    setup() {
+        this.status = useState({ isOpen: false });
+    }
+
+    toggleStatus() {
+        this.status.isOpen = !this.status.isOpen;
+    }
 }
