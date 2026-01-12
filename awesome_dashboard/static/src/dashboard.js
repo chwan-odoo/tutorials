@@ -1,10 +1,11 @@
 /** @odoo-module **/
 
-import { Component } from "@odoo/owl";
+import { Component, onWillStart, useState } from "@odoo/owl";
 import { registry } from "@web/core/registry";
 import { useService } from "@web/core/utils/hooks";
 import { _t } from "@web/core/l10n/translation";
 import { DashboardItem } from "./dashboard_item";
+import { rpc } from "@web/core/network/rpc";
 
 export class AwesomeDashboard extends Component {
     static template = "awesome_dashboard.AwesomeDashboard";
@@ -12,6 +13,13 @@ export class AwesomeDashboard extends Component {
 
     setup() {
         this.actionService = useService("action");
+        this.stats = useState({})
+
+        onWillStart(async () => {
+            const result = await rpc("/awesome_dashboard/statistics");
+            this.stats = result;
+            console.log("Dashboard stats:", this.stats);
+        });
     }
 
     openCustomers() {

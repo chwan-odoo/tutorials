@@ -14,17 +14,34 @@
             </div>
             <div class="d-flex flex-wrap">
                 <DashboardItem>
-                    <div>Card with default size (1)</div>
-                    <button class="btn btn-primary mt-2" t-on-click="openCustomers">
-                        Customers
-                    </button>
+                    <div class="d-flex">
+                        <span class="flex-column me-3">Number of new orders this month</span>
+                        <span class="flex-column o_stat_highlight"><t t-esc="stats.nb_new_orders"/></span>
+                    </div>
                 </DashboardItem>
-
-                <DashboardItem size="2">
-                    <div>Card with size 2</div>
-                    <button class="btn btn-primary mt-2" t-on-click="openLeads">
-                        Leads
-                    </button>
+                <DashboardItem>
+                    <div class="d-flex">
+                        <span class="flex-column me-3">Total amount of new orders this month</span>
+                        <span class="flex-column o_stat_highlight"><t t-esc="stats.total_amount"/></span>
+                    </div>
+                </DashboardItem>
+                <DashboardItem>
+                    <div class="d-flex">
+                        <span class="flex-column me-3">Average amount of t-shirt by order this month</span>
+                        <span class="flex-column o_stat_highlight"><t t-esc="stats.average_quantity"/></span>
+                    </div>
+                </DashboardItem>
+                <DashboardItem>
+                    <div class="d-flex">
+                        <span class="flex-column me-3">Number of cancelled orders this month</span>
+                        <span class="flex-column o_stat_highlight"><t t-esc="stats.nb_cancelled_orders"/></span>
+                    </div>
+                </DashboardItem>
+                <DashboardItem>
+                    <div class="d-flex">
+                        <span class="flex-column me-3">Average time for an order to go from ‘new’ to ‘sent’ or ‘cancelled’</span>
+                        <span class="flex-column o_stat_highlight"><t t-esc="stats.average_time"/></span>
+                    </div>
                 </DashboardItem>
             </div>
         </div>
