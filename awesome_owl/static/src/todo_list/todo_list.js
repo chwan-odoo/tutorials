@@ -9,6 +9,7 @@ export class TodoList extends Component {
 
     setup(){
         this.myRef = useAutofocus('the_input_bar');
+        this.removeTodo = this.removeTodo.bind(this);
         this.todoList = useState([]);
         this.counter = 1;
     }
@@ -23,6 +24,13 @@ export class TodoList extends Component {
             });
             this.counter++;
             ev.target.value = "";
+        }
+    }
+
+    removeTodo(id) {
+        const index = this.todoList.findIndex(todo => todo.id === id);
+        if (index !== -1) {
+            this.todoList.splice(index, 1);
         }
     }
 }

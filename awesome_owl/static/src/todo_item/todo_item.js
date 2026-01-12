@@ -10,8 +10,9 @@ export class TodoItem extends Component {
                 description: String,
                 isCompleted: Boolean,
             },
-            optional: true
+            optional: true,
         },
+        removeTodo: Function,
     };
 
     setup() {

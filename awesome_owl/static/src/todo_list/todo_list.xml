@@ -6,7 +6,7 @@
             <label for="new-todo"><b>Add a new todo: </b></label>
             <input t-ref="the_input_bar" t-on-keyup="addTodo"></input>
             <t t-foreach="todoList" t-as="todo" t-key="todo.id">
-                <TodoItem todo="todo"/>
+                <TodoItem todo="todo" removeTodo="removeTodo"/>
             </t>
         </div>
     </t>

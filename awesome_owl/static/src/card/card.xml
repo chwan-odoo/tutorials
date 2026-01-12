@@ -6,6 +6,7 @@
             <div class="card-body">
                 <h5 class="card-title"><t t-out="props.title"/></h5>
                 <p class="card-text"><t t-esc="props.text"/></p>
+<!--                <t t-slot="default"/>-->
             </div>
         </div>
     </t>
