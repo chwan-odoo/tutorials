@@ -12,13 +12,21 @@ export class AwesomeDashboard extends Component {
     static components = { DashboardItem };
 
     setup() {
+        this.statsService = useService("awesome_dashboard.statistics");
         this.actionService = useService("action");
-        this.stats = useState({})
+        this.state = useState({
+            stats: null,
+        });
 
         onWillStart(async () => {
-            const result = await rpc("/awesome_dashboard/statistics");
-            this.stats = result;
-            console.log("Dashboard stats:", this.stats);
+            try {
+                // const data = await rpc("/awesome_dashboard/statistics");
+                const data = await this.statsService.loadStatistics("/awesome_dashboard/statistics");
+                this.state.stats = data;
+                console.log("Dashboard stats:", this.stats);
+            } catch (e) {
+                console.error("Failed to load statistics", e);
+            }
         });
     }
 
