@@ -1,12 +1,11 @@
 import { Component, onWillStart, onMounted, useRef } from "@odoo/owl";
 import { loadJS } from "@web/core/assets";
 import { useService } from "@web/core/utils/hooks";
-import { rpc } from "@web/core/network/rpc";
 
 export class PieChart extends Component {
     static template = "awesome_dashboard.PieChart";
     static props = {
-        data: { optional: true },
+        data: Object,
     };
 
     setup() {
@@ -14,8 +13,6 @@ export class PieChart extends Component {
 
         onWillStart(async ()=>{
             await loadJS("/web/static/lib/Chart/Chart.js")
-            this.statistics = await rpc("/awesome_dashboard/statistics");
-            console.log("Pie chart statistics:", this.statistics);
         })
 
         onMounted(() => {
@@ -28,9 +25,9 @@ export class PieChart extends Component {
                     datasets: [{
                         label: 'T-Shirts by Size',
                         data: [
-                            this.statistics.orders_by_size.s,
-                            this.statistics.orders_by_size.m,
-                            this.statistics.orders_by_size.xl,
+                            this.props.data.s,
+                            this.props.data.m,
+                            this.props.data.xl,
                         ],
                         backgroundColor: [
                             '#FF6384',
