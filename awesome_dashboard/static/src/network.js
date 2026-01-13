@@ -3,24 +3,31 @@
 import { registry } from "@web/core/registry";
 import { rpc } from "@web/core/network/rpc";
 import { memoize } from "@web/core/utils/functions";
+import { reactive } from "@odoo/owl";
 
 export const networkService = {
     dependencies: [],
 
     start(env) {
-        const fetchStats = async (uri) => {
-            return await rpc(uri);
+        let state = reactive({ data: null });
+
+        const fetchStats = async () => {
+            const result = await rpc("/awesome_dashboard/statistics");
+            state.data = result;
+            return result;
         };
 
-        const cachedFetchStats = memoize(fetchStats);
+        let cachedFetchStats = memoize(fetchStats);
+
+        setInterval(async () => {
+            await fetchStats()
+            console.log("Statistics updated:", state.data);
+        }, 1000 * 2);
+
+        cachedFetchStats()
 
         return {
-            async loadStatistics(uri, useCache = true) {
-                if (!useCache) {
-                    return await fetchStats(uri);
-                }
-                return await cachedFetchStats(uri);
-            }
+            state,
         };
     }
 };
