@@ -5,7 +5,6 @@ import { registry } from "@web/core/registry";
 import { useService } from "@web/core/utils/hooks";
 import { _t } from "@web/core/l10n/translation";
 import { DashboardItem } from "./dashboard_item";
-import { rpc } from "@web/core/network/rpc";
 import { PieChart } from "./pie_chart";
 
 
@@ -22,10 +21,13 @@ export class AwesomeDashboard extends Component {
 
         onWillStart(async () => {
             try {
-                // const data = await rpc("/awesome_dashboard/statistics");
                 const data = await this.statsService.loadStatistics("/awesome_dashboard/statistics");
                 this.state.stats = data;
-                console.log("Dashboard stats:", this.stats);
+                setInterval(()=> {
+                    this.statsService.loadStatistics("/awesome_dashboard/statistics", false).then((data)=>{
+                        this.state.stats = data;
+                    });
+                }, 1000 * 10)
             } catch (e) {
                 console.error("Failed to load statistics", e);
             }

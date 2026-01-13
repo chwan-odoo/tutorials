@@ -15,7 +15,10 @@ export const networkService = {
         const cachedFetchStats = memoize(fetchStats);
 
         return {
-            async loadStatistics(uri) {
+            async loadStatistics(uri, useCache = true) {
+                if (!useCache) {
+                    return await fetchStats(uri);
+                }
                 return await cachedFetchStats(uri);
             }
         };
