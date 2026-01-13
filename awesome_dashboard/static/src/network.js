@@ -9,21 +9,23 @@ export const networkService = {
     dependencies: [],
 
     start(env) {
-        let stats = reactive({ data: null });
+        let stats = reactive({}, ()=>{
+            console.log("Stats updated:", stats);
+        });
 
         const fetchStats = async () => {
-            stats.data = await rpc("/awesome_dashboard/statistics");
+            const updates = await rpc("/awesome_dashboard/statistics");
+            Object.assign(stats, updates);
         };
 
         setInterval(async () => {
             await fetchStats()
-            console.log("Statistics updated:", stats.data);
-        }, 1000 * 2);
+        }, 1000 * 5);
 
         fetchStats()
 
         return {
-            stats,
+            stats
         };
     }
 };

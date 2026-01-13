@@ -15,23 +15,8 @@ export class AwesomeDashboard extends Component {
     setup() {
         this.statsService = useService("awesome_dashboard.statistics");
         this.actionService = useService("action");
-        // this.state = useState({
-        //     stats: null,
-        // });
-
         this.state = useState({
-            stats: this.statsService.stats.data,
-        });
-
-        onWillStart(async () => {
-            try {
-                // const state = await this.statsService.loadStatistics("/awesome_dashboard/statistics");
-                console.log(this.statsService.stats.data)
-
-                // this.state.stats = this.statsService.state.data;
-            } catch (e) {
-                console.error("Failed to load statistics", e);
-            }
+            stats: this.statsService.stats,
         });
     }
 
