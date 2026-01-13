@@ -9,25 +9,21 @@ export const networkService = {
     dependencies: [],
 
     start(env) {
-        let state = reactive({ data: null });
+        let stats = reactive({ data: null });
 
         const fetchStats = async () => {
-            const result = await rpc("/awesome_dashboard/statistics");
-            state.data = result;
-            return result;
+            stats.data = await rpc("/awesome_dashboard/statistics");
         };
-
-        let cachedFetchStats = memoize(fetchStats);
 
         setInterval(async () => {
             await fetchStats()
-            console.log("Statistics updated:", state.data);
+            console.log("Statistics updated:", stats.data);
         }, 1000 * 2);
 
-        cachedFetchStats()
+        fetchStats()
 
         return {
-            state,
+            stats,
         };
     }
 };

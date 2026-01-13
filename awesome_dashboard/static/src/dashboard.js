@@ -20,13 +20,13 @@ export class AwesomeDashboard extends Component {
         // });
 
         this.state = useState({
-            stats: this.statsService.state.data,
+            stats: this.statsService.stats.data,
         });
 
         onWillStart(async () => {
             try {
                 // const state = await this.statsService.loadStatistics("/awesome_dashboard/statistics");
-                console.log(this.statsService.state.data)
+                console.log(this.statsService.stats.data)
 
                 // this.state.stats = this.statsService.state.data;
             } catch (e) {
