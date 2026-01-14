@@ -29,6 +29,7 @@
                             <field name="postcode"/>
                             <field name="date_availability"/>
                             <field name="active" invisible="1"/>
+                            <field name="company_id"/>
                         </group>
                         <group string="Financial">
                             <field name="expected_price"/>
