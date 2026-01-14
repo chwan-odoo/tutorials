@@ -15,7 +15,7 @@
         "views/estate_property_views.xml",
         "views/res_users_views.xml",
         "views/estate_property_kanban_view.xml",
-        "views/report/estate_property_offer.xml",
+        "report/estate_property_offer.xml",
         'views/branch_views.xml',
     ],
     "demo": [
