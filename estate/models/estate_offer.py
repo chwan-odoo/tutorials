@@ -36,6 +36,9 @@ class EstatePropertyOffer(models.Model):
             if property_id:
                 curr_property = self.env["estate.property"].browse(property_id)
 
+                if curr_property.state == "sold":
+                    raise UserError("Cannot make an offer on a sold property.")
+
                 # Check if new offer price is lower than existing offers
                 if curr_property.offer_ids:
                     max_existing_price = max(curr_property.offer_ids.mapped("price"))

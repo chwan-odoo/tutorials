@@ -10,6 +10,7 @@
         'account',
     ],
     'data': [
+        "report/estate_property_offer_extended.xml",
     ],
     'demo': [
     ],

@@ -128,6 +128,14 @@ class Estate(models.Model):
                         "The selling price cannot be lower than 90% of the expected price."
                     )
 
+    @api.constrains("state")
+    def _check_can_not_sell_property_with_no_offer(self):
+        for record in self:
+            if record.state == "sold" and not record.offer_ids:
+                raise ValidationError(
+                    "A property cannot be sold without at least one offer."
+                )
+
     @api.ondelete(at_uninstall=False)
     def _unlink_if_new_or_cancelled(self):
         for record in self:

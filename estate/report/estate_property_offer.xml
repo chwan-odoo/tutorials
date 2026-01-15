@@ -61,4 +61,55 @@
         <field name="binding_model_id" ref="model_estate_property"/>
         <field name="binding_type">report</field>
     </record>
+
+    <template id="report_user_properties_template">
+        <t t-foreach="docs" t-as="user">
+            <t t-call="web.html_container">
+                <t t-call="web.external_layout">
+                    <div class="page">
+                        <h1>Properties for <span t-field="user.name"/></h1>
+
+                        <t t-if="user.property_ids">
+                            <t t-foreach="user.property_ids" t-as="property">
+                                <div style="margin-top: 20px;">
+                                    <h3><span t-field="property.name"/></h3>
+                                    <div>
+                                        <strong>Expected Price: </strong>
+                                        <span t-field="property.expected_price"/>
+                                    </div>
+                                    <div>
+                                        <strong>Status: </strong>
+                                        <span t-field="property.state"/>
+                                    </div>
+                                    <t t-if="property.offer_ids">
+                                        <h4>Offers:</h4>
+                                        <t t-call="estate.report_property_offers_table">
+                                            <t t-set="offers" t-value="property.offer_ids"/>
+                                        </t>
+                                    </t>
+                                    <t t-else="">
+                                        <p><em>No offers for this property.</em></p>
+                                    </t>
+                                </div>
+                                <hr/>
+                            </t>
+                        </t>
+                        <t t-else="">
+                            <p><em>No properties assigned to this user.</em></p>
+                        </t>
+                    </div>
+                </t>
+            </t>
+        </t>
+    </template>
+
+    <record id="report_user_properties" model="ir.actions.report">
+        <field name="name">User Properties</field>
+        <field name="model">res.users</field>
+        <field name="report_type">qweb-html</field>
+        <field name="report_name">estate.report_user_properties_template</field>
+        <field name="report_file">estate.report_user_properties_template</field>
+        <field name="binding_model_id" ref="base.model_res_users"/>
+        <field name="binding_type">report</field>
+    </record>
 </odoo>
